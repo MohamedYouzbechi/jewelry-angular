@@ -13,6 +13,6 @@ export class CategoryService {
 
   /*GET ALL CATEGORIES */
   getAllCategories() : Observable<any[]>  {
-    return this.httpClient.get<any[]>(this.SERVER_URL + '/categories/');
+    return this.httpClient.get<any[]>(this.SERVER_URL + '/categories');
   }
 }

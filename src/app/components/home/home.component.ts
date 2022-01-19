@@ -1,5 +1,6 @@
-import { ProductService } from './../services/product.service';
-import { ProductModelServer, ServerResponse } from './../models/product.model';
+import { CartService } from '../../services/cart.service';
+import { ProductService } from '../../services/product.service';
+import { ProductModelServer, ServerResponse } from '../../models/product.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,12 +16,13 @@ export class HomeComponent implements OnInit {
 
   constructor(private router:Router,
               private productService:ProductService,
+              private cartService:CartService,
               private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
 
     this.category = this.activatedRoute.snapshot.paramMap.get('cat');
-    console.log(this.category)
+    console.log('cat from home',this.category)
     if (this.category) {
       this.productService.getProductsFromCategory(this.category).subscribe((prods:ServerResponse)=>{
         this.products = prods.products;
@@ -39,6 +41,6 @@ export class HomeComponent implements OnInit {
   }
 
   AddToCart(id: number) {
-    // this.cartService.AddProductToCart(id);
+    this.cartService.AddProductToCart(id);
   }
 }

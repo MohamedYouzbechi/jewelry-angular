@@ -1,4 +1,4 @@
-import { ProductService } from './../services/product.service';
+import { ProductService } from '../../services/product.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {map} from 'rxjs/operators';
