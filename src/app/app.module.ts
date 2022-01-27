@@ -1,3 +1,4 @@
+import { httpInterceptorProviders } from './interceptors/index';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,6 +20,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthServiceConfig, GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
+import { CookieService } from 'ngx-cookie-service';
+
+import { registerLocaleData } from '@angular/common';
+import localeTn from '@angular/common/locales/fr-TN';
+registerLocaleData(localeTn, 'tn');
 
 let config = new AuthServiceConfig([
   {
@@ -59,7 +65,9 @@ export function provideConfig() {
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
-    }
+    },
+    CookieService,
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent],
 })

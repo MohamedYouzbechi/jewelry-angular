@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="col-9 offset-2">
+    <!-- form update start here -->
+    <form #f="ngForm" (ngSubmit)="addEditProduct(f)">
+        <!-- Title validation start here -->
+        <div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Title</label>
+            <input type="text" class="form-control" [(ngModel)]="product.title" required name="title" #name="ngModel" ngModel minlength="2" maxlength="50">
+          </div>
+          <div class="alert alert-danger" *ngIf="name.errors?.required && name.touched">
+            Title is required
+          </div>
+          <div class="alert alert-danger" *ngIf="name.errors?.minlength && name.touched">
+            Title must be have at least 2 character
+          </div>
+          <div class="alert alert-danger" *ngIf="name.errors?.maxlength && name.touched">
+            Title must be have less then 50 character
+          </div>
+        </div>
+        <!-- Title validation end here -->
+
+        <!-- Category validation start here -->
+        <div class="form-group">
+          <label for="selectedCategory">Category</label>
+          <select id="selectedCategory" name="cat_id" [(ngModel)]="product.cat_id" class="form-control">
+              <option  [selected]="product.cat_id==c.id" [value]="c.id" *ngFor="let c of categories">{{c.title}}</option>
+          </select>
+        </div>
+        <!-- Category validation end here -->
+
+        <!--Short description validation start here -->
+        <div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Short description</label>
+              <input type="text" class="form-control" [(ngModel)]="product.short_desc" required name="short_desc" #short_desc="ngModel" maxlength="150" ngModel>
+            </div>
+            <div class="alert alert-danger" *ngIf="short_desc.errors?.required && short_desc.touched">
+              Short description is required
+            </div>
+            <div class="alert alert-danger" *ngIf="short_desc.errors?.maxlength && short_desc.touched">
+              Short description must be have less then 150 characters
+            </div>
+        </div>
+        <!-- Short description validation end here -->
+
+        <!-- Price validation start here -->
+        <div class="row justify-content-between">
+        <div class="col-5">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Price</label>
+            <input type="number" class="form-control" [(ngModel)]="product.price" required name="price" #price="ngModel" ngModel>
+          </div>
+          <div class="alert alert-danger" *ngIf="price.errors?.required && price.touched">
+            Price is required
+          </div>
+        </div>
+        <!-- Price validation end here -->
+
+        <!-- Quantity validation start here -->
+        <div class="col-5">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Quantity</label>
+            <input type="number" class="form-control" [(ngModel)]="product.quantity" required name="quantity" #quantity="ngModel" ngModel>
+          </div>
+          <div class="alert alert-danger" *ngIf="quantity.errors?.required && quantity.touched">
+            Quantity is required
+          </div>
+        </div>
+        <!-- Quantity validation end here -->
+        </div>
+
+        <div class="row">
+          <!-- description validation start here -->
+          <div class="form-group col-6">
+            <label for="desc">Description</label>
+            <textarea id="desc" name="description" rows="5" cols="33" class="form-control"
+              [(ngModel)]="product.description" ngModel
+            >
+            </textarea>
+          </div>
+          <!-- description validation end here -->
+
+          <!-- Start IMG -->
+          <div class="col-4 offset-2">
+            <div class="text-center">
+              <button type="button" (click)='filePicker.click()' class="btn btn-success">Sélectionner image</button>
+            </div>
+            <div class="form-group">
+              <input type="file" #filePicker (change)='onImageSelected($event)' class="form-control"  style="visibility: hidden;" />
+            </div>
+            <div class="text-center mb-5">
+              <img [src]="imagePreview" *ngIf="imagePreview" height ="180">
+            </div>
+          </div>
+          <!-- End IMG -->
+        </div>
+
+        <!-- Alert Error msg -->
+        <div class="alert alert-danger" *ngIf="messageErr">
+          {{messageErr}}
+        </div>
+        <!-- Alert Success msg -->
+        <div class="alert alert-success" *ngIf="messageSuccess">
+            {{messageSuccess}}
+        </div>
+        <button class="btn btn-primary" [disabled]="f.invalid">Save product</button>
+    </form>
+    <!-- form update end here -->
+  </div>
+</div>

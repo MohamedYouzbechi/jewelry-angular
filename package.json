@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "admin-start": "ng serve --project=\"admin\" --port 4300"
   },
   "private": true,
   "dependencies": {
@@ -19,7 +20,9 @@
     "@angular/platform-browser": "~9.1.13",
     "@angular/platform-browser-dynamic": "~9.1.13",
     "@angular/router": "~9.1.13",
+    "@auth0/angular-jwt": "^5.0.2",
     "angularx-social-login": "^2.3.1",
+    "ngx-cookie-service": "^11.0.2",
     "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^12.1.0",
     "rxjs": "~6.5.4",

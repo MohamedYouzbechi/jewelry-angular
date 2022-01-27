@@ -16,7 +16,7 @@ export class CheckEmailService {
   searchEmail(text) {
     return timer(2000)
       .pipe(
-        switchMap(() => this.httpClient.get(`${this.SERVER_URL}/users/validate/${text}`)),
+        switchMap(() => this.httpClient.get(`${this.SERVER_URL}/users/validate/${text}`))
       ); // PIPE ENDS HERE
   }
 

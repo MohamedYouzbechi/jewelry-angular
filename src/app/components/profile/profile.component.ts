@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SocialUser } from 'angularx-social-login';
 import { map } from 'rxjs/operators';
 import { UserService, ResponseModel } from './../../services/user.service';
@@ -11,13 +12,13 @@ import { Component, OnInit } from '@angular/core';
 export class ProfileComponent implements OnInit {
   myUser: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.userService.userData$
       .pipe(
         map((user: SocialUser | ResponseModel) => {
-          if (user instanceof SocialUser || user.type === 'social') {
+          if (user instanceof SocialUser || user?.type === 'social') {
             return {
               ...user,
               email: 'test@test.com',
@@ -30,6 +31,12 @@ export class ProfileComponent implements OnInit {
       .subscribe((data: ResponseModel | SocialUser) => {
         this.myUser = data;
       });
+
+      // this.userService.authState$.subscribe(authState => {
+      //   if (!authState) {
+      //     this.router.navigateByUrl('/login');
+      //   }
+      // });
   }
 
   logout() {

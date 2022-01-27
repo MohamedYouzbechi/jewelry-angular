@@ -1,0 +1,43 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-danger" [hidden]="!hasError">
+        {{ errorMessage }}
+      </div>
+      <div class="alert alert-success" [hidden]="!success">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <div class="col">
+      <table class="table table-bordered">
+        <thead class="bg-dark text-light">
+        <tr>
+          <th>Id</th>
+          <th width="20%">Username</th>
+          <th width="30%">Email</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Type</th>
+          <th>Photo</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.fname }}</td>
+          <td>{{ user.lname }}</td>
+          <td>{{ user.type }}</td>
+          <td><img [src]="user.photoUrl | defaultImage: placeholder:true" [alt]="user.username" height="60" class="order-1"></td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

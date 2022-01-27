@@ -27,7 +27,7 @@
                   <span class="text-danger mr-md-2" style="cursor: pointer;"><i class="fa fa-trash" (click)="cartService.DeleteProductFromCart(i)"></i></span>
               </td>
               <td><p>{{c.product.name}}</p></td>
-              <td><p>{{c.product.price | currency:'TND'}}</p></td>
+              <td><p>{{c.product.price | currency:'TND':'symbol':'1.0':'tn'}}</p></td>
               <td>
                 <form>
                   <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
@@ -40,7 +40,7 @@
                 </form>
               </td>
               <td>
-                <p>{{cartService.CalculateSubTotal(i) | currency:'TND'}}</p>
+                <p>{{cartService.CalculateSubTotal(i) | currency:'TND':'symbol':'1.0':'tn'}}</p>
               </td>
             </tr>
             <tr class="border-0">
@@ -48,7 +48,7 @@
               <td></td>
               <td></td>
               <td>TOTAL</td>
-              <td>{{cartTotal | currency:'TND'}}</td>
+              <td>{{cartTotal | currency:'TND':'symbol':'1.0':'tn'}}</td>
             </tr>
           </tbody>
         </table>

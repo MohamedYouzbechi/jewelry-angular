@@ -1,3 +1,4 @@
+import { CartService } from './../../services/cart.service';
 import { ProductService } from '../../services/product.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,11 +19,13 @@ export class ProductComponent implements OnInit, AfterViewInit {
 
   @ViewChild('quantity') quantityInput;
 
-  constructor(private productService: ProductService,
-              private route: ActivatedRoute) { }
+  constructor(
+    private productService: ProductService,
+    private cartService:CartService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
+    this.activatedRoute.paramMap.pipe(
       map((param) => {
         // @ts-ignore
         return param.params.id;
@@ -112,7 +115,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   }
 
   addToCart(id: number) {
-    // this.cartService.AddProductToCart(id, this.quantityInput.nativeElement.value);
+    this.cartService.AddProductToCart(id, this.quantityInput.nativeElement.value);
   }
 
 }

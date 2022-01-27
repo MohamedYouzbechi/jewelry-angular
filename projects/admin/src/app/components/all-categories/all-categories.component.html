@@ -1,0 +1,83 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-6 offset-md-3">
+      <button class="btn btn-success mb-4" (click)="getdata(-1, '', false)" data-toggle="modal" data-target="#exampleModal">Add new category</button>
+    </div>
+    <div class="col-6 offset-md-3">
+      <div class="alert alert-danger" [hidden]="!hasError">
+        {{ errorMessage }}
+      </div>
+      <div class="alert alert-success" [hidden]="!success">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <div class="col-6 offset-md-3">
+      <table class="table table-bordered">
+        <thead class="bg-dark text-light">
+        <tr>
+          <th>Id</th>
+          <th width="65%">Name</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let c of cats">
+          <td>{{ c.id }}</td>
+          <td>{{ c.title }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary mr-2" (click)="getdata(c.id, c.title, true)" type="button" data-toggle="modal" data-target="#exampleModal">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteCategory(c.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Update Form with Model Bootstrap -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <!-- form update start here -->
+          <form #f="ngForm" (ngSubmit)="addEditCategory(f)">
+            <!-- Name validation start here -->
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Title</label>
+              <input type="text" class="form-control" placeholder="Title" [(ngModel)]="dataCategory.title" required name="title" #title="ngModel" ngModel minlength="2" maxlength="50">
+            </div>
+            <div class="alert alert-danger" *ngIf="title.errors?.required && title.touched">
+              Title is required
+            </div>
+            <div class="alert alert-danger" *ngIf="title.errors?.minlength && title.touched">
+              Title must be have at least 2 character
+            </div>
+            <!-- Name validation end here -->
+            <!-- Alert Error msg -->
+            <div class="alert alert-danger" *ngIf="messageErr">
+              {{messageErr}}
+            </div>
+            <!-- Alert Success msg -->
+            <div class="alert alert-success" *ngIf="messageSuccess">
+                {{messageSuccess}}
+            </div>
+            <button class="btn btn-primary" [disabled]="f.invalid">Save category</button>
+          </form>
+          <!-- form update end here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

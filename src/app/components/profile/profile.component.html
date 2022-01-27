@@ -13,7 +13,7 @@
       <div class="col-md-6">
         <div class="profile-head">
           <h5>
-            {{myUser?.name || (myUser.fname + ' ' + myUser.lname)}}
+            {{myUser?.name || (myUser?.fname + ' ' + myUser?.lname)}}
           </h5>
           <h6>
             Web Developer and Designer
@@ -31,9 +31,9 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-2">
+      <!-- <div class="col-md-2">
         <button (click)="logout()" class="btn btn-secondary btn-sm" name="btnAddMore" type="button">Logout</button>
-      </div>
+      </div> -->
     </div>
     <div class="row">
       <div class="col-md-4">
@@ -58,7 +58,7 @@
                 <label>User Id</label>
               </div>
               <div class="col-md-6">
-                <p>{{myUser.id || myUser.userId}}</p>
+                <p>{{myUser?.id || myUser?.userId}}</p>
               </div>
             </div>
             <div class="row">
@@ -66,7 +66,7 @@
                 <label>Name</label>
               </div>
               <div class="col-md-6">
-                <p>{{myUser.name || myUser.username}}</p>
+                <p>{{myUser?.name || myUser?.username}}</p>
               </div>
             </div>
             <div class="row">
@@ -74,7 +74,7 @@
                 <label>Email</label>
               </div>
               <div class="col-md-6">
-                <p>{{myUser.email}}</p>
+                <p>{{myUser?.email}}</p>
               </div>
             </div>
             <div class="row">

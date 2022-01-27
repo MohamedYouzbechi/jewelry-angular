@@ -1,3 +1,6 @@
+import { NoguardUserGuard } from './guard/noguard-user.guard';
+import { ProfileGuard } from './guard/profile.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ThankyouComponent } from './components/thankyou/thankyou.component';
@@ -8,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HomeLayoutComponent } from './components/home-layout/home-layout.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NoguardAdminGuard } from 'projects/admin/src/app/guard/noguard-admin.guard';
 
 const routes: Routes = [
   {
@@ -18,10 +22,11 @@ const routes: Routes = [
       { path: 'home/:cat', component: HomeComponent },
       { path: 'product/:id', component: ProductComponent },
       {path: 'cart', component: CartComponent},
-      {path: 'checkout', component: CheckoutComponent},
+      {path: 'checkout', component: CheckoutComponent, canActivate: [ProfileGuard]},
       {path: 'thankyou', component: ThankyouComponent},
       {path: 'register', component: RegisterComponent},
-      {path: 'login', component: LoginComponent}
+      {path: 'login', component: LoginComponent, canActivate: [NoguardUserGuard, NoguardAdminGuard]},
+      {path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard]}
     ],
   },
 ];

@@ -1,0 +1,78 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-danger" [hidden]="!hasError">
+        {{ errorMessage }}
+      </div>
+      <div class="alert alert-success" [hidden]="!success">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <div class="col-9 offset-md-3">
+      <table class="table table-bordered">
+        <thead class="bg-dark text-light">
+        <tr>
+          <th>Order Id</th>
+          <th width="65%">Username</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+          <ng-container *ngFor="let order of orders">
+            <tr >
+              <td>{{ order.order_id }}</td>
+              <td>{{ order.username }}</td>
+              <td>
+                <a class="btn btn-sm btn-primary mr-2" data-toggle="collapse" href="#Collapse{{order.order_id}}" type="button" aria-expanded="false">Display details</a>
+                <button class="btn btn-sm btn-danger" (click)="deleteOrder(order.order_id)">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+
+                      <div class="row" *ngIf="order.details.length > 0">
+                        <div class="col">
+                          <div class="collapse" id="Collapse{{order.order_id}}">
+                            <div class="card card-body">
+                              <table class="table table-bordered" style="font-size: 0.8rem">
+                                <thead class="bg-dark text-light">
+                                <tr>
+                                  <th>Prod Id</th>
+                                  <th width="20%">Title</th>
+                                  <th width="35%">Description</th>
+                                  <th>Qty ordered</th>
+                                  <th>Image</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr *ngFor="let details of order.details">
+                                  <td class="p-2 text-center font-weight-bold">{{ details.product_id }}</td>
+                                  <td class="p-2">{{ details.title }}</td>
+                                  <td class="p-2">{{ details.description }}</td>
+                                  <td class="p-2 text-center ">{{ details.qty_ordered }}</td>
+                                  <td class="p-1"><img [src]="details.image" [alt]="details.name" height="60"></td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="order.details.length == 0" class="collapse" id="Collapse{{order.order_id}}">
+                        <p   class="text-center font-weight-bold p-3 mb-2 bg-danger text-white">No Products to display</p>
+                      </div>
+
+
+              </td>
+            </tr>
+          </ng-container>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

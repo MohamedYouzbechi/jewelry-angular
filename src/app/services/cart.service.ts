@@ -61,10 +61,13 @@ export class CartService {
       this.cartDataClient = info;
 
       //  Loop through each entry and put it in the cartDataServer object
+      let i =0;
       this.cartDataClient.prodData.forEach((p) => {
+        console.log('From 11', ++i)
         this.productService
           .getSingleProduct(p.id)
           .subscribe((actualProductInfo: ProductModelServer) => {
+            console.log('From subscribe', i)
             if (this.cartDataServer.data[0].numInCart === 0) {
               this.cartDataServer.data[0].numInCart = p.incart;
               this.cartDataServer.data[0].product = actualProductInfo;
@@ -83,6 +86,7 @@ export class CartService {
             }
             this.cartData$.next({ ...this.cartDataServer });
           });
+          console.log('From 22', i)
       });
     }
   }
@@ -101,7 +105,7 @@ export class CartService {
         this.cartDataClient.total = this.cartDataServer.total;
         localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
         this.cartData$.next({ ...this.cartDataServer });
-        this.toast.success(`${prod.name} added to the cart`, 'Product Added', {
+        this.toast.success(`${prod.title} added to the cart`, 'Product Added', {
           timeOut: 1500,
           progressBar: true,
           progressAnimation: 'increasing',
@@ -131,7 +135,7 @@ export class CartService {
           this.cartDataClient.total = this.cartDataServer.total;
           localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
           this.toast.info(
-            `${prod.name} quantity updated in the cart`,
+            `${prod.title} quantity updated in the cart`,
             'Product Updated',
             {
               timeOut: 1500,
@@ -152,7 +156,7 @@ export class CartService {
           });
 
           this.toast.success(
-            `${prod.name} added to the cart`,
+            `${prod.title} added to the cart`,
             'Product Added',
             {
               timeOut: 1500,

@@ -1,0 +1,42 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-danger" [hidden]="!hasError">
+        {{ errorMessage }}
+      </div>
+      <div class="alert alert-success" [hidden]="!success">
+        {{ errorMessage }}
+      </div>
+    </div>
+    <div class="col-10 offset-1">
+      <table class="table table-bordered">
+        <thead class="bg-dark text-light">
+        <tr>
+          <th>Id</th>
+          <th width="20%">Name</th>
+          <th width="30%">Description</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th width="70">Image</th>
+          <th width="130">Operation</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let p of products">
+          <td>{{ p.id }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.description }}</td>
+          <td>{{ p.price | currency:'TND':'symbol':'1.0':'tn' }}</td>
+          <td>{{ p.category }}</td>
+          <td class="p-1"><img [src]="p.image | defaultImage: placeholder" [alt]="p.name" height="60"></td>
+          <td>
+            <button class="btn btn-sm btn-primary mr-2" (click)="editProduct(p.id)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

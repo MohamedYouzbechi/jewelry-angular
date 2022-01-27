@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { CartModelServer } from './../../models/cart.model';
 import { CartService } from './../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,17 +16,24 @@ export class CheckoutComponent implements OnInit {
   model: any = {};
 
   constructor(private cartService: CartService,
-              private spinner: NgxSpinnerService) { }
+    private userService: UserService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.cartService.cartData$.subscribe(data => this.cartData = data);
     this.cartService.cartTotal$.subscribe(total => this.cartTotal = total);
+
+    this.userService.userData$.subscribe(user => {
+      // @ts-ignore
+      this.userId = user.id;
+      console.log(this.userId);
+    });
   }
 
   onCheckout() {
     if (this.cartTotal > 0) {
       this.spinner.show().then(p => {
-        this.cartService.CheckoutFromCart(22);
+        this.cartService.CheckoutFromCart(this.userId);
       });
     } else {
       return;

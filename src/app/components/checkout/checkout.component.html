@@ -86,7 +86,7 @@
           <div class="order-products">
             <div class="order-col" *ngFor="let c of cartData.data">
               <div>{{c.numInCart}} x {{c.product?.name}}</div>
-              <div>{{(c.product?.price * c.numInCart) | currency:'TND'}}</div>
+              <div>{{(c.product?.price * c.numInCart) | currency:'TND':'symbol':'1.0':'tn'}}</div>
             </div>
           </div>
           <div class="order-col">
@@ -95,7 +95,7 @@
           </div>
           <div class="order-col">
             <div><strong>TOTAL</strong></div>
-            <div><strong class="order-total">{{cartTotal | currency:'TND'}}</strong></div>
+            <div><strong class="order-total">{{cartTotal | currency:'TND':'symbol':'1.0':'tn'}}</strong></div>
           </div>
         </div>
         <div class="input-checkbox">
@@ -105,7 +105,7 @@
             I've read and accept the <a href="#">terms & conditions</a>
           </label>
         </div>
-        <button class="btn btn-outline-danger btn-sm my-2 btn-block order-submit"
+        <button class="btn btn-sm my-2 btn-block order-submit"
             (click)="onCheckout()"
             [disabled]="cartTotal <= 0"
             [class.disabled]="cartTotal<=0"

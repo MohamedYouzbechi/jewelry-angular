@@ -23,8 +23,8 @@
             <td>
               <img [src]="p.image" alt="{{p.name}}" class="img-thumbnail" width="100px">
             </td>
-            <td>{{p.name}}</td>
-            <td>{{p.price | currency:'TND'}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.price | currency:'TND':'symbol':'1.0':'tn'}}</td>
             <td>{{p.quantityOrdered}}</td>
           </tr>
 
@@ -32,7 +32,7 @@
             <td style="border: none;"></td>
             <td></td>
             <td>TOTAL</td>
-            <td>{{cartTotal | currency:'TND'}}</td>
+            <td>{{cartTotal | currency:'TND':'symbol':'1.0':'tn'}}</td>
           </tr>
         </tbody>
       </table>
